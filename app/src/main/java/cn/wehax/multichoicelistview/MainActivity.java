@@ -2,7 +2,9 @@ package cn.wehax.multichoicelistview;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class MainActivity extends RoboActionBarActivity {
     public ListView list;
 
     @InjectView(R.id.select_all)
-    Button selectAllBtn;
+    CheckBox cbSelectAll;
 
     private List<String> listData = new ArrayList<>();
     public ListViewAdapter adapter = null;
@@ -28,19 +30,19 @@ public class MainActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        genarateDummyData(20);
+        generateDummyData(20);
         adapter = new ListViewAdapter(this, listData);
         list.setAdapter(adapter);
 
-        selectAllBtn.setOnClickListener(new View.OnClickListener() {
+        cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                // TODO 实现全选
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                adapter.chooseAll(isChecked);
             }
         });
     }
 
-    private void genarateDummyData(int itemCount) {
+    private void generateDummyData(int itemCount) {
         if (itemCount < 0)
             return;
 

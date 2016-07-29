@@ -57,6 +57,9 @@ public class ListViewAdapter extends BaseAdapter {
         }
 
         holder.name.setText(getItem(position));
+
+        holder.checkBox.setChecked(isSelected(position));
+
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +109,24 @@ public class ListViewAdapter extends BaseAdapter {
      */
     private boolean isSelected(int position) {
         return selectedSet.contains(position);
+    }
+
+
+    /**
+     * isChooseAll=true,全选；反之，取消全选
+     *
+     * @param isChooseAll
+     */
+    public void chooseAll(boolean isChooseAll) {
+        if(isChooseAll){
+            for(int i = 0; i< listData.size();++i){
+                selectedSet.add(i);
+            }
+        }else{
+            selectedSet.clear();
+        }
+
+        notifyDataSetChanged();
     }
 
     class ViewHolder {
