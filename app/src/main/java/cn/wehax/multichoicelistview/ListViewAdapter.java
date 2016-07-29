@@ -63,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
 
                 if (isSelected(position)) {
                     Log.e(TAG, getItem(position) + "取消选中");
-                    cancelSelected(position, holder);
+                    cancelSelect(position, holder);
                 } else {
                     Log.e(TAG, getItem(position) + "被选中");
                     select(position, holder);
@@ -84,7 +84,7 @@ public class ListViewAdapter extends BaseAdapter {
      */
     private void select(int position, ViewHolder holder) {
         selectedSet.add(position);
-        holder.select.setChecked(true);
+        holder.checkBox.setChecked(true);
     }
 
     /**
@@ -93,9 +93,9 @@ public class ListViewAdapter extends BaseAdapter {
      * @param position
      * @param holder
      */
-    private void cancelSelected(int position, ViewHolder holder) {
+    private void cancelSelect(int position, ViewHolder holder) {
         selectedSet.remove(position);
-        holder.select.setChecked(false);
+        holder.checkBox.setChecked(false);
     }
 
     /**
@@ -111,12 +111,12 @@ public class ListViewAdapter extends BaseAdapter {
     class ViewHolder {
         RelativeLayout root;
         TextView name;
-        CheckBox select;
+        CheckBox checkBox;
 
         ViewHolder(View view) {
             root = (RelativeLayout) view.findViewById(R.id.root_view);
             name = (TextView) view.findViewById(R.id.name);
-            select = (CheckBox) view.findViewById(R.id.select);
+            checkBox = (CheckBox) view.findViewById(R.id.select);
         }
     }
 
